@@ -6,7 +6,7 @@ Pequeño traductor web que usa la API gratuita de **MyMemory**. Sin registro, si
 
 [![GitHub Pages](https://img.shields.io/badge/🌐_Online-Traductor-2E5BBA?style=for-the-badge)](https://joelpasapera.github.io/Translator/)
 
-https://joelpasapera.github.io/Translator/
+Link de la página web: https://joelpasapera.github.io/Translator/
 
 ## Qué hace
 
