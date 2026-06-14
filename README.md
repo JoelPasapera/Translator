@@ -4,7 +4,7 @@ Pequeño traductor web que usa la API gratuita de **MyMemory**. Sin registro, si
 
 &gt; Implementado 100 % en el navegador. Sin frameworks pesados, sin backend, sin instalación. Pruebalo aqui 👇!
 
-[![GitHub Pages](https://img.shields.io/badge/🌐_Traductor-2E5BBA?style=for-the-badge)](https://joelpasapera.github.io/Translator/)
+[![GitHub Pages](https://img.shields.io/badge/🌐_Online-Traductor-2E5BBA?style=for-the-badge)](https://joelpasapera.github.io/Translator/)
 
 ## Qué hace
 
