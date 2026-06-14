@@ -3,14 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traductor</title>
+
+  <!-- ===================== SEO ===================== -->
+  <title>Traductor gratis online — más de 36 idiomas | sin registro</title>
+  <meta name="description" content="Traductor gratuito online entre más de 36 idiomas. Rápido, sin registro y sin instalar nada: traduce textos al instante desde el navegador." />
+  <meta name="keywords" content="traductor, traductor online, traducir gratis, traductor de idiomas, traducción online, translator" />
+  <meta name="robots" content="index, follow" />
+  <!-- Opcional: descomenta y pon tu nombre si quieres aparecer como autor -->
+  <!-- <meta name="author" content="Tu nombre" /> -->
+
+  <!-- Cambia TU-DOMINIO.com por tu URL real cuando lo publiques -->
+  <link rel="canonical" href="https://TU-DOMINIO.com/" />
+
+  <!-- ============ Open Graph (al compartir el enlace) ============ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Traductor gratis online — más de 36 idiomas" />
+  <meta property="og:description" content="Traduce textos al instante entre más de 36 idiomas. Gratis y sin registro." />
+  <meta property="og:url" content="https://TU-DOMINIO.com/" />
+  <meta property="og:image" content="https://TU-DOMINIO.com/og-image.png" /> <!-- imagen 1200x630 px -->
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- ===================== Twitter Card ===================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Traductor gratis online — más de 36 idiomas" />
+  <meta name="twitter:description" content="Traduce textos al instante entre más de 36 idiomas. Gratis y sin registro." />
+  <meta name="twitter:image" content="https://TU-DOMINIO.com/og-image.png" />
+
+  <!-- ===================== Favicon ===================== -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- ============ Datos estructurados (SEO) ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Traductor",
+    "description": "Traductor gratuito online entre más de 36 idiomas.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="card">
     <header class="brand">
-      <h1>Traductor</h1>
-      <p class="sub">Traducción gratuita con MyMemory.</p>
+      <!-- Logo (SVG en línea: nítido a cualquier tamaño y editable aquí mismo) -->
+      <svg class="logo-mark" viewBox="0 0 40 40" width="44" height="44" aria-hidden="true" focusable="false">
+        <rect width="40" height="40" rx="10" fill="var(--accent)" />
+        <g stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16 H28" />
+          <path d="M24 12 L28 16 L24 20" />
+          <path d="M28 24 H12" />
+          <path d="M16 20 L12 24 L16 28" />
+        </g>
+      </svg>
+      <div class="brand-text">
+        <h1>Traductor</h1>
+        <p class="sub">Traducción gratuita con MyMemory.</p>
+      </div>
     </header>
 
     <section class="panels">
@@ -23,7 +76,7 @@
         </div>
       </div>
 
-      <!-- Botón de intercambio (la 'firma' del diseño) -->
+      <!-- Botón de intercambio -->
       <div class="gutter">
         <button id="swap" class="swap" title="Intercambiar idiomas" aria-label="Intercambiar idiomas">
           <span aria-hidden="true">⇄</span>
@@ -43,11 +96,46 @@
 
     <button id="boton" class="translate">Traducir</button>
 
+    <div class="usage" aria-live="polite">
+      <div class="usage-head">
+        <span>Uso de hoy (estimación)</span>
+        <span id="usage-text">0 / 5.000</span>
+      </div>
+      <div class="usage-bar"><div id="usage-fill" class="usage-fill"></div></div>
+      <p class="usage-note">MyMemory no informa del límite exacto restante. Esto es una estimación según lo traducido en este navegador (el límite real se cuenta por IP).</p>
+    </div>
+
     <details class="options">
       <summary>Opciones</summary>
       <label for="email">Tu email (opcional)</label>
       <input id="email" class="email" type="email" placeholder="tu@correo.com" autocomplete="email" />
       <p class="hint">Añadir tu email multiplica ×10 el límite diario gratuito. Solo se manda a la propia API de traducción.</p>
+    </details>
+
+    <details class="help">
+      <summary>Ayuda</summary>
+
+      <ul class="help-list">
+        <li>Escribe o pega el texto, elige los idiomas y pulsa <strong>Traducir</strong> (o <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>Enter</kbd>).</li>
+        <li>Usa el botón <strong>⇄</strong> para intercambiar el idioma de origen y el de destino.</li>
+        <li>Máximo <strong>500 caracteres</strong> por traducción. El contador avisa en ámbar al pasarte.</li>
+        <li>Añade tu email en <strong>Opciones</strong> para multiplicar ×10 el límite diario.</li>
+        <li>El medidor de uso es una estimación de lo traducido en este navegador.</li>
+      </ul>
+
+      <p class="help-social-label">Sígueme en redes</p>
+      <!-- Cambia TU-USUARIO por tu usuario real en cada red -->
+      <div class="socials">
+        <a class="social fb" href="https://facebook.com/TU-USUARIO" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+        </a>
+        <a class="social ig" href="https://instagram.com/TU-USUARIO" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
+        </a>
+        <a class="social gh" href="https://github.com/TU-USUARIO" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+        </a>
+      </div>
     </details>
   </main>
 
