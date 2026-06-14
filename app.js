@@ -59,6 +59,8 @@ const calidad    = $("calidad");
 const copiar     = $("copiar");
 const swap       = $("swap");
 const emailInput = $("email");
+const usageText  = $("usage-text");
+const usageFill  = $("usage-fill");
 
 
 /* ---------- Arranque ---------- */
@@ -75,12 +77,14 @@ function init() {
   hacia.value = "en";
 
   actualizarContador();
+  actualizarMedidor();
 
   // Eventos
   texto.addEventListener("input", actualizarContador);
   boton.addEventListener("click", traducir);
   copiar.addEventListener("click", copiarResultado);
   swap.addEventListener("click", intercambiar);
+  emailInput.addEventListener("input", actualizarMedidor); // el límite cambia según el email
 
   // Atajo de teclado: Ctrl/Cmd + Enter para traducir
   texto.addEventListener("keydown", (e) => {
@@ -146,6 +150,62 @@ function mostrarError(msg) {
 }
 
 
+/* ---------- Medidor de uso (estimación local) ----------
+   MyMemory NO devuelve cuánto límite te queda: su API solo avisa
+   (quotaFinished) cuando ya se ha agotado. Por eso llevamos una
+   estimación local: contamos los caracteres traducidos en este
+   navegador y los guardamos por día. Es aproximado, porque el límite
+   real lo cuenta MyMemory por dirección IP, no por navegador.
+   Plan gratuito: ~5.000 caracteres/día sin email, ~50.000 con email. */
+const LIMITE_SIN_EMAIL = 5000;
+const LIMITE_CON_EMAIL = 50000;
+const STORAGE_KEY = "traductor_uso";
+
+let usoMemoria = 0; // respaldo por si el navegador no permite almacenamiento
+
+function hoy() {
+  return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+}
+
+function limiteActual() {
+  return emailInput.value.includes("@") ? LIMITE_CON_EMAIL : LIMITE_SIN_EMAIL;
+}
+
+function leerUso() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const d = JSON.parse(raw);
+      if (d.fecha === hoy()) return d.usado || 0;   // solo cuenta lo de hoy
+    }
+  } catch (_) { /* sin almacenamiento: tiramos de memoria */ }
+  return usoMemoria;
+}
+
+function guardarUso(usado) {
+  usoMemoria = usado;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ fecha: hoy(), usado: usado }));
+  } catch (_) { /* sin almacenamiento: queda solo en esta sesión */ }
+}
+
+function sumarUso(caracteres) {
+  guardarUso(leerUso() + caracteres);
+  actualizarMedidor();
+}
+
+function actualizarMedidor() {
+  const usado  = leerUso();
+  const limite = limiteActual();
+  const pct    = Math.min(100, Math.round((usado / limite) * 100));
+
+  usageText.textContent = usado.toLocaleString("es") + " / " + limite.toLocaleString("es");
+  usageFill.style.width = pct + "%";
+  usageFill.classList.toggle("warn", pct >= 75 && pct < 100);
+  usageFill.classList.toggle("full", pct >= 100);
+}
+
+
 /* ---------- Traducción (la 'carnecita') ---------- */
 async function traducir() {
   const q = texto.value.trim();
@@ -191,10 +251,13 @@ async function traducir() {
 
     // MyMemory devuelve un aviso (no un error) cuando se agota el límite del día
     if (/MYMEMORY WARNING/i.test(texto_traducido)) {
+      guardarUso(limiteActual());   // refleja "agotado" en el medidor
+      actualizarMedidor();
       throw new Error("Has agotado el límite gratuito de hoy. Añade tu email en Opciones para ×10, o inténtalo mañana.");
     }
 
     mostrarResultado(texto_traducido, Number(data.responseData.match));
+    sumarUso(q.length);   // suma a la estimación de uso del día
 
   } catch (e) {
     mostrarError("Error: " + e.message);
