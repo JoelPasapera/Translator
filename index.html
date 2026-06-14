@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traductor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <header class="brand">
+      <h1>Traductor</h1>
+      <p class="sub">Traducción gratuita con MyMemory.</p>
+    </header>
+
+    <section class="panels">
+      <!-- Panel de entrada -->
+      <div class="panel">
+        <select id="desde" class="lang" aria-label="Idioma de origen"></select>
+        <textarea id="texto" class="field" placeholder="Escribe o pega tu texto...">Hola, ¿cómo estás?</textarea>
+        <div class="foot">
+          <span id="contador" class="count">0 / 500</span>
+        </div>
+      </div>
+
+      <!-- Botón de intercambio (la 'firma' del diseño) -->
+      <div class="gutter">
+        <button id="swap" class="swap" title="Intercambiar idiomas" aria-label="Intercambiar idiomas">
+          <span aria-hidden="true">⇄</span>
+        </button>
+      </div>
+
+      <!-- Panel de salida -->
+      <div class="panel">
+        <select id="hacia" class="lang" aria-label="Idioma de destino"></select>
+        <div id="resultado" class="field output placeholder" aria-live="polite">La traducción aparecerá aquí.</div>
+        <div class="foot">
+          <span id="calidad" class="quality"></span>
+          <button id="copiar" class="copy" hidden>Copiar</button>
+        </div>
+      </div>
+    </section>
+
+    <button id="boton" class="translate">Traducir</button>
+
+    <details class="options">
+      <summary>Opciones</summary>
+      <label for="email">Tu email (opcional)</label>
+      <input id="email" class="email" type="email" placeholder="tu@correo.com" autocomplete="email" />
+      <p class="hint">Añadir tu email multiplica ×10 el límite diario gratuito. Solo se manda a la propia API de traducción.</p>
+    </details>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
