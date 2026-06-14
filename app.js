@@ -63,9 +63,7 @@ const usageText  = $("usage-text");
 const usageFill  = $("usage-fill");
 
 
-/* ---------- Arranque ---------- */
-init();
-
+/* ---------- Arranque (init() se llama al final, cuando ya está todo declarado) ---------- */
 function init() {
   // Ordenar idiomas por nombre y rellenar los dos selectores
   const ordenados = [...IDIOMAS].sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
@@ -265,3 +263,7 @@ async function traducir() {
     boton.disabled = false;
   }
 }
+
+
+/* Arranca la app una vez definido todo lo anterior */
+init();
